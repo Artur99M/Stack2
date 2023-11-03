@@ -1,6 +1,7 @@
-#include "stack.h"
-#include <stdio.h>
 #include <assert.h>
+#include <stdio.h>
+#include "stack.h"
+#include "stack_protection.h"
 
 static const int changesize = 2;
 
@@ -14,8 +15,7 @@ int isEmpty(struct stack* p) {
     return p->size == 0;
 }
 
-int StackPush(stack* p, const elem_t number, const char* stackname,
-const char* filename, const int numline, const char* func)
+int StackPush(stack* p, const elem_t number)
 {
 
     if (p == nullptr)
@@ -42,8 +42,7 @@ const char* filename, const int numline, const char* func)
     return 0;
 }
 
-elem_t StackPop(stack* p, const char* stackname, int* ERROR, const char* filename,
-const int numline, const char* func)
+elem_t StackPop(stack* p, int* ERROR)
 {
     *ERROR = 0;
     if (p == nullptr)
@@ -84,8 +83,7 @@ const int numline, const char* func)
     return answer;
 }
 
-int StackCtor (stack* p, const size_t capacity, const char* stackname,
-const char* filename, const int numline, const char* func)
+int StackCtor (stack* p, const size_t capacity)
 {
     if (p == nullptr)
         return 1;
@@ -98,8 +96,7 @@ const char* filename, const int numline, const char* func)
     return 0;
 }
 
-int StackDtor (stack* p, const char* stackname,
-const char* filename, const int numline, const char* func)
+int StackDtor (stack* p)
 {
     if (p == nullptr)
         return 1;
