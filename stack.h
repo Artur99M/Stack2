@@ -11,11 +11,11 @@ struct stack {
     elem_t* data;
 };
 
-int isFull (stack*);
-int isEmpty (stack*);
-int StackPush(stack*, const elem_t);
-elem_t StackPop(stack*, int*);
-int StackCtor (stack*, const size_t);
-int StackDtor (stack*);
+int isFull (stack* p);
+int isEmpty (stack* p);
+int StackPush(stack* p, const elem_t number);
+elem_t StackPop(stack* p, int* ERROR);
+int StackCtor (stack* p, const size_t capacity);
+int StackDtor (stack* p);
 
 #endif
