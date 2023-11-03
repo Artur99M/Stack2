@@ -13,8 +13,8 @@ struct stack {
 
 int isFull (stack* p);
 int isEmpty (stack* p);
-int StackPush(stack* p, const elem_t number);
-elem_t StackPop(stack* p, int* ERROR);
+int StackPush (stack* p, const elem_t number);
+elem_t StackPop (stack* p, int* ERROR);
 int StackCtor (stack* p, const size_t capacity);
 int StackDtor (stack* p);
 
