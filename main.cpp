@@ -5,18 +5,16 @@
 int main (int argc, char* argv [])
 {
     stack p;
-    STACK_CTOR (&p, 5);
-    PUSH (&p, 5);
-    PUSH (&p, 5);
-    PUSH (&p, 5);
-    PUSH (&p, 5);
-    PUSH (&p, 5);
-    PUSH (&p, 5);
-    STACK_DUMP (p);
+    StackCtor (&p, 5);
+
+    for (int i = 0; i < 100; i++)
+        StackPush (&p, i);
+
     int q = 0;
-    printf ("%d %d\n", POP (&p, &q), q);
-    printf ("%d %d\n", POP (&p, &q), q);
-    printf ("%d %d\n", POP (&p, &q), q);
-    STACK_DTOR (&p);
+    for (int i = 0; i < 60; i++)
+        printf ("%d %d\n", StackPop (&p, &q), q);
+
+    STACK_DUMP (p);
+    StackDtor (&p);
 }
 
