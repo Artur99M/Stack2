@@ -5,12 +5,12 @@
 
 static const int changesize = 2;
 
-int isFull(struct stack* p){
+int isFull (stack* p){
     assert(p != nullptr);
-    return p->size == p->capacity - 1;
+    return p->size == p->capacity;
 }
 
-int isEmpty(struct stack* p) {
+int isEmpty (stack* p) {
     assert(p != nullptr);
     return p->size == 0;
 }
@@ -26,13 +26,16 @@ int StackPush(stack* p, const elem_t number)
 
     if (isFull (p))
     {
-        elem_t* data = (elem_t*) realloc (p->data, p->capacity * sizeof(elem_t) * changesize);
+        elem_t* data = (elem_t*) calloc (p->capacity * changesize, sizeof (elem_t));
 
         if (data == nullptr)
             return 4;
 
+        for (size_t i = 0; i < p->capacity; i++)
+            data[i] = p->data[i];
+
         p->capacity *= changesize;
-        //free (p->data);
+        free (p->data);
         p->data = data;
     }
 
@@ -42,7 +45,7 @@ int StackPush(stack* p, const elem_t number)
     return 0;
 }
 
-elem_t StackPop(stack* p, int* ERROR)
+elem_t StackPop (stack* p, int* ERROR)
 {
     *ERROR = 0;
     if (p == nullptr)
@@ -64,20 +67,21 @@ elem_t StackPop(stack* p, int* ERROR)
     p->data[p->size] = NULL;
 
 
-    if (p->size < p->capacity / changesize) {
+    if (p->size < p->capacity / changesize)
+    {
         p->capacity /= changesize;
         elem_t* data = nullptr;
-        if ((data = (elem_t*) malloc(p->capacity * sizeof(elem_t))) == nullptr) {
+
+        if ((data = (elem_t*) calloc (p->capacity, sizeof(elem_t))) == nullptr) {
             *ERROR += 4;
             return 0;
-        } else
-        {
-            for (size_t i = 0; i < p->size; i++)
-                data[i] = p->data[i];
-            free(p->data);
-            p->data = data;
         }
-    }
+
+        for (size_t i = 0; i < p->size; i++)
+            data[i] = p->data[i];
+        free(p->data);
+        p->data = data;
+}
 
 
     return answer;
