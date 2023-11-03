@@ -17,5 +17,6 @@ void StackDump (stack p, char* stackname, char* file, int numline, const char* f
             printf ("       %d\n", p.data[i]);
         }
     }
+
     printf ("   }\n}\n>>> StackDump() has been finished\n");
 }
