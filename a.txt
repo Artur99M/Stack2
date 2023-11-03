@@ -1,0 +1,23 @@
+>>> StackDump() has been started
+Stack "p" from file "main.cpp", func "main" on 15 line
+p
+{
+    p.capacity = 10
+    p.size = 6
+   {
+       5
+       5
+       5
+       5
+       5
+       5
+>>>    0     <<<
+       0
+       0
+       0
+   }
+}
+>>> StackDump() has been finished
+5 0
+5 0
+5 0
