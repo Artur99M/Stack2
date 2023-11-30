@@ -1,5 +1,7 @@
 #include "stack_protection.h"
 #include <stdio.h>
+#include "stack.h"
+#include <stdlib.h>
 
 void StackDump (stack p, char* stackname, char* file, int numline, const char* func)
 {
@@ -11,7 +13,7 @@ void StackDump (stack p, char* stackname, char* file, int numline, const char* f
     {
         if (i == p.size)
         {
-            printf (">>>    %d     <<<\n", p.data[i]);
+            printf (">>>    %d    <<<\n", p.data[i]);
         } else
         {
             printf ("       %d\n", p.data[i]);
