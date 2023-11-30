@@ -2,6 +2,7 @@
 #define STACK_H
 
 #include <stdio.h>
+#include "stack_protection.h"
 
 typedef int elem_t;
 
