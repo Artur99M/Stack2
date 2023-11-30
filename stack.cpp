@@ -6,7 +6,7 @@
 static const int changesize = 2;
 
 int isFull (stack* p){
-    assert(p != nullptr);
+    assert (p != nullptr);
     return p->size == p->capacity;
 }
 
@@ -15,7 +15,7 @@ int isEmpty (stack* p) {
     return p->size == 0;
 }
 
-int StackPush(stack* p, const elem_t number)
+int StackPush (stack* p, const elem_t number)
 {
 
     if (p == nullptr)
@@ -26,10 +26,11 @@ int StackPush(stack* p, const elem_t number)
 
     if (isFull (p))
     {
+        p->capacity *= changesize;
         elem_t* data = (elem_t*) calloc (p->capacity * changesize, sizeof (elem_t));
 
         if (data == nullptr)
-            return 4;
+            return 8;
 
         for (size_t i = 0; i < p->capacity; i++)
             data[i] = p->data[i];
@@ -53,12 +54,17 @@ elem_t StackPop (stack* p, int* ERROR)
         *ERROR += 1;
         return 0;
     }
+    /*if (IsAliveCanary (p, sizeof (stack)) != 0)
+    {
+        *ERROR += 2;
+        return 0;
+    }*/
 
     elem_t answer = 0;
 
     if (isEmpty (p))
     {
-        *ERROR += 2;
+        *ERROR += 4;
         return 0;
     }
 
@@ -73,7 +79,7 @@ elem_t StackPop (stack* p, int* ERROR)
         elem_t* data = nullptr;
 
         if ((data = (elem_t*) calloc (p->capacity, sizeof(elem_t))) == nullptr) {
-            *ERROR += 4;
+            *ERROR += 8;
             return 0;
         }
 
@@ -83,6 +89,11 @@ elem_t StackPop (stack* p, int* ERROR)
         p->data = data;
 }
 
+    /*if (IsAliveCanary (p, sizeof (stack)) != 0)
+    {
+        *ERROR += 16;
+        return 0;
+    }*/
 
     return answer;
 }
@@ -94,8 +105,7 @@ int StackCtor (stack* p, const size_t capacity)
 
     p->capacity = capacity;
     p->size = 0;
-    if ((p->data = (elem_t*) calloc (capacity, sizeof(elem_t))) == nullptr)
-        return 2;
+    if ((p->data = (elem_t*) calloc (capacity, sizeof(elem_t))) == nullptr) return 2;
 
     return 0;
 }
